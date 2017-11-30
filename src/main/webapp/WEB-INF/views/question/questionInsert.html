@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new question</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h2>Dodaj nowe pytanie</h2>
+    <form th:action="@{/question/insert}" method="post" th:object="${questionWithCategory}">
+        <div>
+            <label for="text">
+                Question text:
+                <input type="text" id="text" th:field="*{text}"/>
+            </label>
+        </div>
+        <div>
+            <label>
+                <select th:field="*{categoryId}">
+                    <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"></option>
+                </select>
+            </label>
+        </div>
+        <div>
+            <table class="table table-striped">
+                <thead class="thead-inverse">
+                    <th>Odpowiedz</th>
+                    <th>Punkty</th>
+                </thead>
+                <tbody>
+                    <tr th:each="a, stat : *{answerPoints}">
+                        <td th:text="${a.answer.text}"></td>
+                        <td>
+
+                            <select th:field="*{answerPoints[__${stat.index}__].points}">
+                                <option th:each="p : ${points}" th:text="${p}" th:value="${p}"></option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group">
+            <input class="btn btn-success" type="submit" th:value="Add"/>
+            <input class="btn btn-secondary" type="reset" th:value="Reset"/>
+        </div>
+    </form>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-action"><a href="/question/select/all">Show all questions</a>
+        <li class="list-group-item list-group-item-action"><a href="/">Main menu</a>
+    </ul>
+</div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+</body>
+</html>

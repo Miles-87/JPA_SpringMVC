@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+</head>
+<body>
+    <h2>Nie udalo sie wstawic nowego pytania!</h2>
+    <h2>Blad:</h2>
+    <h3 th:text="${msg}"></h3>
+
+    <li><a href="/">Main menu</a></li>
+    <li><a href="/questionanswers/select/all">Questions With Answers</a></li>
+</body>
+</html>
